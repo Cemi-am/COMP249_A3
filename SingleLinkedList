@@ -1,0 +1,20 @@
+public class SingleLinkedList<T> {
+    private Node<T> head;
+
+    private class Node<T> {
+        private T data;
+        private Node<T> next;
+
+        public Node(T data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    // Other methods for the linked list...
+
+    public static void main(String[] args) {
+        SingleLinkedList<Integer> list = new SingleLinkedList<>();
+        // Add code here to test the linked list...
+    }
+}

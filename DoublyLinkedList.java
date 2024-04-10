@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.ArrayList;
 
-public class DoubleLinkedList {
+public class DoublyLinkedList {
     private class DNode {
         Vocab data;
         DNode prev;
@@ -15,7 +15,7 @@ public class DoubleLinkedList {
         }
     }
 
-    private DoubleLinkedList() {
+    private DoublyLinkedList() {
         head = null;
         tail = null;
     }

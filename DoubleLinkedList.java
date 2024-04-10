@@ -7,11 +7,14 @@ public class DoubleLinkedList {
         DNode prev;
         DNode next;
 
-        public DNode(Vocab data) {
+        public DNode(Vocab data, Node prev, Node next) {
             this.data = data;
-            this.prev = null;
-            this.next = null;
+            this.prev = prev;
+            this.next = next;
+        }
 
+        public DNode(Vocab data) {
+            this(data, null, null);
         }
     }
 

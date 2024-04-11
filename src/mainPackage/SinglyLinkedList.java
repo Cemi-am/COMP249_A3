@@ -111,6 +111,13 @@ public class SinglyLinkedList {
     }
 
 
+
+    public void insertAtEnd(String line) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'insertAtEnd'");
+    }
+
+
     /*
      * We have to add a method that will change the link of the last node to the new node
      * so we can add a new node to the end of the list (useful with bufferedReader)

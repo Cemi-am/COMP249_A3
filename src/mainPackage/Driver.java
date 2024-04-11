@@ -3,6 +3,9 @@ import java.util.Scanner;
 public class Driver {
 
     public static void main(String[] args) {
+        
+        DoublyLinkedList dll = Vocab.inputToVocab("A3_input_file.txt"); //JUST A TEST
+        dll.printList(); //JUST A TEST
 
         Scanner scanner = new Scanner(System.in);
 

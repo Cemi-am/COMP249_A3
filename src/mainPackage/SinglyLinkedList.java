@@ -46,11 +46,6 @@ public class SinglyLinkedList {
 
 
 
-    // Add a new node to the begining of the list
-    public void addToStart(String word) {
-        head = new SNode(word, head); //Here, the previous reference held in head is now the link of the new node
-    } 
-
     //Sets the head to the next node (deletes the first node)
     public boolean deleteHeadNode() {
         if (head != null) {
@@ -59,6 +54,17 @@ public class SinglyLinkedList {
         } else {
             return false;
         }
+    }
+
+    //Deletes a node at a certain index
+    public void deleteAtIndex(int index) {
+        SNode position = head;
+        int count = 0;
+        while (position.getLink() != null && count < index) {
+            position = position.getLink();
+            count++;
+        }
+        position.setLink(position.getLink().getLink()); //Set the link of the previous node to the node after the next node
     }
 
     //Gives back the size of the linkedList
@@ -92,7 +98,7 @@ public class SinglyLinkedList {
     }
 
     //Prints the linkedList
-    public void outputList() {
+    public void printList() {
         SNode position = head;
         int count = 1;
         while (position != null) {
@@ -103,17 +109,24 @@ public class SinglyLinkedList {
     }
 
 
+    // Add a new node to the begining of the list
+    public void addToStart(String word) {
+        head = new SNode(word, head); //Here, the previous reference held in head is now the link of the new node
+    } 
+
     //Inserts a new node at the end of the list
     public void insertAtEnd(String word) {
+        if (head == null) {
+            addToStart(word);
+            return;
+        }
         SNode newNode = new SNode();
         SNode position = head;
-        while (position.getLink() != null) {
-            position = position.getLink();
+        while (position.link != null) {
+            position = position.link;
         }
-
         newNode.setData(word);
         position.setLink(newNode);
-
     }
 
     //Inserts a new node at a certain index
@@ -125,7 +138,6 @@ public class SinglyLinkedList {
             position = position.getLink();
             count++;
         }
-
         newNode.setData(word); //Set the data of the new node
         newNode.setLink(position.getLink()); //Set the link of the new node to the next node
         position.setLink(newNode); //Set the link of the previous node to the new node

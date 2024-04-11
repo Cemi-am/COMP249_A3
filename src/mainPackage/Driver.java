@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Driver {
 
     public static void main(String[] args) {
-        
-        DoublyLinkedList dll = Vocab.inputToVocab("A3_input_file.txt"); //JUST A TEST
-        dll.printList(); //JUST A TEST
+
+        // DoublyLinkedList dll = Vocab.inputToVocab("A3_input_file.txt"); //JUST A TEST
+        // dll.printList(); //JUST A TEST
 
         Scanner scanner = new Scanner(System.in);
 
@@ -107,10 +107,10 @@ public class Driver {
                  * Load from a file
                  */
                 case 7:
-                    /*
-                     * Just use the VocabListHandler class to read the file
-                     *  --> VocabListHandler.inputToVocabObjects(TEXT FILE NAME);
-                     */
+                    System.out.println("Enter the name of the input file: ");
+                    String fileInput = scanner.nextLine();
+                    DoublyLinkedList dll = Vocab.inputToVocab(fileInput);
+                    System.out.println("File loaded successfully.");
                     break;
 
                 /*

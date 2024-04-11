@@ -8,46 +8,34 @@ public class SinglyLinkedList {
         
         //Instance Variables
         private String word; //Data being stored
-        private SNode link; //Pointer to the next node 
-        private int wordCount; //Counts the number of the word (i.e. index)
+        private SNode link; //Pointer to the next node
 
         //Default Constructor
         public SNode() {
             word = null;
             link = null;
-            wordCount = 0;
         }
-        //Parameterized Constructor
-        public SNode(String newWord, SNode linkValue, int newWordCount) {
+
+        //Parameterized Constructors
+        public SNode(String newWord, SNode linkValue) {
             word = newWord;
             link = linkValue;
-            wordCount = newWordCount;
         }
 
         //Mutators
         public void setData(String newWord) {
             word = newWord;
         }
-    
         public void setLink(SNode newLink) {
             link = newLink;
-        }
-
-        public void setCount(int newWordCount) {
-            wordCount = newWordCount;
         }
 
         //Accesors
         public String getWord() {
             return word;
         }
-    
         public SNode getLink() {
             return link;
-        }
-        
-        public int getCount() {
-            return wordCount;
         }
 
     }//End of SNode Class
@@ -59,11 +47,11 @@ public class SinglyLinkedList {
 
 
     // Add a new node to the begining of the list
-    public void addToStart(String wordName, int wordCount) {
-        head = new SNode(wordName, head, wordCount);
-    }
+    public void addToStart(String word) {
+        head = new SNode(word, head); //Here, the previous reference held in head is now the link of the new node
+    } 
 
-
+    //Sets the head to the next node (deletes the first node)
     public boolean deleteHeadNode() {
         if (head != null) {
             head = head.getLink();
@@ -84,10 +72,12 @@ public class SinglyLinkedList {
         return count;
     }
 
+    //Checks if the linkedList contains a certain word
     public boolean contains(String key) {
         return (findData(key) != null);
     }
 
+    //Finds the data in the linkedList
     private SNode findData(String target) {
         SNode position = head;
         String dataAtPosition;
@@ -101,27 +91,44 @@ public class SinglyLinkedList {
         return null;
     }
 
-    //
+    //Prints the linkedList
     public void outputList() {
         SNode position = head;
+        int count = 1;
         while (position != null) {
-            System.out.println(position.getWord() + " " + position.getCount());
+            System.out.println(count+". "+position.getWord());
             position = position.getLink();
+            count++;
         }
     }
 
 
+    //Inserts a new node at the end of the list
+    public void insertAtEnd(String word) {
+        SNode newNode = new SNode();
+        SNode position = head;
+        while (position.getLink() != null) {
+            position = position.getLink();
+        }
 
-    public void insertAtEnd(String line) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertAtEnd'");
+        newNode.setData(word);
+        position.setLink(newNode);
+
     }
 
+    //Inserts a new node at a certain index
+    public void insertAtIndex(String word, int index) {
+        SNode newNode = new SNode();
+        SNode position = head;
+        int count = 0;
+        while (position.getLink() != null && count < index) {
+            position = position.getLink();
+            count++;
+        }
 
-    /*
-     * We have to add a method that will change the link of the last node to the new node
-     * so we can add a new node to the end of the list (useful with bufferedReader)
-     * 
-     */
+        newNode.setData(word); //Set the data of the new node
+        newNode.setLink(position.getLink()); //Set the link of the new node to the next node
+        position.setLink(newNode); //Set the link of the previous node to the new node
+    }
 
 }//End of SinglyLinkedList Class

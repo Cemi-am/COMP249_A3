@@ -39,7 +39,7 @@ public class VocabListHandler {
                         words.insertAtEnd(line); //THIS METHOD NEEDS TO BE CREATED IN THE SinglyLinkedList CLASS
                     }
                     Vocab vocab = new Vocab(topic, words);
-                    //vocabList.insertAtEnd(vocab); //TO BE FIXED (Need to insertAtEnd in a DoublyLinkedList)
+                    //vocabList.insertAtEnd(vocab); //TO BE FIXED (Need to insertAtEnd in a DoublyLinkedList???)
                 }
             }
             br.close();

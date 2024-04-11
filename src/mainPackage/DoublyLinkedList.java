@@ -1,16 +1,28 @@
+package mainPackage;
+
 import java.util.LinkedList;
 import java.util.ArrayList;
 
 public class DoublyLinkedList {
-    private class DNode {
-        Vocab data;
-        DNode prev;
-        DNode next;
+    
+    private DNode head;
+    private DNode tail;
+    private int length;
 
-        public DNode(Vocab data, Node prev, Node next) {
+    private class DNode {
+
+        private Vocab data;
+        private DNode next;
+        private DNode prev;
+
+        public DNode(Vocab data, DNode prev, DNode next) {
             this.data = data;
-            this.prev = prev;
-            this.next = next;
+            // this.prev = prev;
+            // this.next = next;
+            
+            /*
+             * To be removed.. i think
+             */
         }
 
         public DNode(Vocab data) {
@@ -18,13 +30,21 @@ public class DoublyLinkedList {
         }
     }
 
+    //Default Constructor
     private DoublyLinkedList() {
         head = null;
         tail = null;
+        length = 0;
     }
 
+    //Check if the list is empty
     public boolean isEmpty() {
         return head == null;
+    }
+
+    //Return the length of the list
+    public int length() {
+        return length;
     }
 
     public void insertAtEnd(Vocab vocab) {

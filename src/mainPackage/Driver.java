@@ -1,7 +1,11 @@
+package mainPackage;
 import java.util.Scanner;
 public class Driver {
-    public static scanner sc;
+
     public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
         System.out.print("""
             -----------------------------
              Vocabulary Control Center
@@ -19,11 +23,12 @@ public class Driver {
             -----------------------------
             Enter Your Choice: """);
         
-        int inputChoice = sc.nextInt();
+        int inputChoice = scanner.nextInt();
         System.out.print("Enter the name of the input file: ");
-        String inputFile = sc.nextLine();
+        String inputFile = scanner.nextLine();
         System.out.println("Done Loading");
 
+        scanner.close();
     }
     
 }

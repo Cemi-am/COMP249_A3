@@ -1,6 +1,3 @@
-package mainPackage;
-
-
 //import java.util.ArrayList;   ONLY TO BE USED FOR CASE 8
 
 public class DoublyLinkedList {

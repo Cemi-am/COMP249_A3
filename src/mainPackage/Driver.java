@@ -1,10 +1,11 @@
-package mainPackage;
 import java.util.Scanner;
+
 public class Driver {
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
+        //DoublyLinkedList dll = new DoublyLinkedList(); //OFFICIAL CODE
         DoublyLinkedList dll = Vocab.inputToVocab("A3_input_file.txt"); //JUST A TEST
 
         //While loop for the menu
@@ -24,7 +25,7 @@ public class Driver {
             9 save to file
             0 exit
             ----------------------------------------------
-            Enter Your Choice:\s""");
+            Enter Your Choice: """);
 
             int inputChoice = sc.nextInt();
 
@@ -53,7 +54,7 @@ public class Driver {
                      * 3. Ask user to input the words for the new topic
                      * 4. Insert the new topic before the selected one
                      */
-                    dll = insertATopic(dll);
+                    dll = insertATopicBefore(dll);
                     break;
 
                 /*
@@ -67,6 +68,7 @@ public class Driver {
                      * 3. Ask user to input the words for the new topic
                      * 4. Insert the new topic after the selected one
                      */
+                    dll = insertATopicAfter(dll);
                     break;
 
                 /*
@@ -77,7 +79,6 @@ public class Driver {
                      * Implement a method to remove a topic
                      * 1. Print all topics and ask user to choose one
                      * 2. Once a topic is chosen, remove it
-                     * 3*. MAYBE FUSE TWO LINKEDLIST IDK YET
                      */
                     break;
 
@@ -108,9 +109,15 @@ public class Driver {
                  */
                 case 7:
                     System.out.println("Enter the name of the input file: ");
-                    String fileInput = sc.nextLine();
-                    DoublyLinkedList dll2 = Vocab.inputToVocab(fileInput);
-                    System.out.println("File loaded successfully.");
+                    String fileInput = sc.next();
+                    try {
+                        dll = Vocab.inputToVocab(fileInput); //Replace previous file with this one
+                        System.out.println("File loaded successfully.");
+                    } catch (Exception e) {
+                        System.out.println("File not found.");
+                    }
+                    
+                    
                     break;
 
                 /*
@@ -185,7 +192,7 @@ public class Driver {
 
     }// end of browseTopics
 
-    public static DoublyLinkedList insertATopic(DoublyLinkedList dll) {
+    public static DoublyLinkedList insertATopicBefore(DoublyLinkedList dll) {
         boolean restart = true;
         do {
             displayTopics(dll);
@@ -218,7 +225,42 @@ public class Driver {
 
 
         return dll;
-    }
+    }// end of insertATopicBefore
+
+    public static DoublyLinkedList insertATopicAfter(DoublyLinkedList dll) {
+        boolean restart = true;
+        do {
+            displayTopics(dll);
+            int userChoice = sc.nextInt();
+            sc.nextLine(); // junk
+
+            if (userChoice == 0) {
+                System.out.println();
+                restart = false;
+            } else {
+                int newIndex = userChoice;
+                System.out.print("Enter a topic name: ");
+                String newTopicName = sc.nextLine();
+
+                // Create new linkedlist with the new words
+                SinglyLinkedList newWords = new SinglyLinkedList();
+                System.out.println("Enter a word - to quit press Enter:");
+                String word = sc.nextLine();
+                while (!word.isEmpty()) {
+                    newWords.insertAtEnd(word);
+                    word = sc.nextLine();
+                }
+
+                // Create new Vocab object
+                Vocab newVocab = new Vocab(newTopicName, newWords);
+                dll.insertAtIndex(newVocab, newIndex);
+            }
+
+        } while(restart);
+
+
+        return dll;
+    }// end of insertATopicAfter
 
     public static void displayTopics(DoublyLinkedList dll) {
         System.out.println("""

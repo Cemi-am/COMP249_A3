@@ -1,4 +1,3 @@
-package mainPackage;
 import java.io.*;
 
 //add word, remove word, modify word, get topic, display words, get words
@@ -63,7 +62,7 @@ public class Vocab {
             e.printStackTrace();
         }
         return vocabList;
-    }
+    }//inputToVocab
 
 
 

@@ -85,15 +85,16 @@ public class Driver {
                  */
                 case 5:
                     /*
-                     * 1. Print all topics and ask user to choose one
+                     * -------------------1. Print all topics and ask user to choose one
                      * 2. Once a topic is chosen, ask user what he wants to modify
                      *  2.1. Add a word (if word already exist tell user)
                      *  2.2. Remove a word (if word not found tell user it doesn't exist)
                      *  2.3. Modify a word (if word not found tell user it doesn't exist)
                      * 3. Go back to asking what change user whant until chooses to exit
                      */
-                    break;
 
+                    DoublyLinkedList.modifyTopic(dll);
+                    break;
                 /*
                  * Search topics for a word
                  */

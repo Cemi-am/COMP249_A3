@@ -60,7 +60,11 @@ public class SinglyLinkedList {
     public void deleteAtIndex(int index) {
         SNode position = head;
         int count = 0;
-        while (position.getLink() != null && count < index) {
+        if (index == 0) {
+            deleteHeadNode();
+            return;
+        }
+        while (position.getLink() != null && count < index-1) {
             position = position.getLink();
             count++;
         }
@@ -80,21 +84,23 @@ public class SinglyLinkedList {
 
     //Checks if the linkedList contains a certain word
     public boolean contains(String key) {
-        return (findData(key) != null);
+        return (search(key) != -1);
     }
 
     //Finds the data in the linkedList
-    private SNode findData(String target) {
+    public int search(String target) {
         SNode position = head;
         String dataAtPosition;
+        int count = 0;
         while (position != null) {
             dataAtPosition = position.getWord();
             if (dataAtPosition.equals(target)) {
-                return position;
+                return count;
             }
             position = position.getLink();
+            count++;
         }
-        return null;
+        return -1;
     }
 
     //Prints the linkedList
@@ -133,8 +139,12 @@ public class SinglyLinkedList {
     public void insertAtIndex(String word, int index) {
         SNode newNode = new SNode();
         SNode position = head;
+        if (index == 0) {
+            addToStart(word);
+            return;
+        }
         int count = 0;
-        while (position.getLink() != null && count < index) {
+        while (position.getLink() != null && count < index-1) {
             position = position.getLink();
             count++;
         }

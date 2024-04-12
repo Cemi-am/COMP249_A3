@@ -292,4 +292,63 @@ public class DoublyLinkedList {
 
     }
 
+    public static void modifyTopic(DoublyLinkedList dll) {
+        while (true) {
+            Driver.displayTopics(dll);
+            String topicChoice = sc.next();
+            sc.nextLine();
+
+            if (topicChoice.equals("0")) {
+                System.out.println();
+                break;
+            } else {
+                DoublyLinkedList.DNode current = dll.getHead();
+                int index = 1;
+                while (current != null && index != Integer.parseInt(topicChoice)) {
+                    current = current.next;
+                    index++;
+                }
+                if (current != null) {
+                    boolean restart = true;
+                    while (restart) {
+                        System.out.println("""
+                        ----------------------------------------------
+                                        Modify a topic
+                        ----------------------------------------------
+                            a. Add a word
+                            r. Remove a word
+                            c. Change a word
+                            0. Exit
+                        ----------------------------------------------""");
+                        System.out.print("Enter your Choice: ");
+                        String modChoice = sc.next();
+                        
+                        switch (modChoice) {
+                            case "a":                            
+                                //addWord METHOD
+                                current.getData().addWord();
+                                break;
+                            case "r":
+                                //removeWord METHOD
+                                current.getData().removeWord();
+                                break;
+                            case "c":
+                                //changeWord METHOD
+                                current.getData().changeWord();
+                                break;
+                            case "0":
+                                System.out.println();
+                                restart = false;
+                                break;
+                            default:
+                                System.out.println("Invalid input. Please try again.");
+                                break;
+                        }// end of switch
+                    }// end of while to choose modification
+                } else {
+                    System.out.println("Invalid input. Please try again.");
+                }// end of else
+            }// end of if 
+        }// end of while to choose topic
+    }// end of modifyTopic
 }

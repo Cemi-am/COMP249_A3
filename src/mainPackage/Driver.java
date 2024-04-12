@@ -7,6 +7,7 @@ public class Driver {
 
         //DoublyLinkedList dll = new DoublyLinkedList(); //OFFICIAL CODE
         DoublyLinkedList dll = Vocab.inputToVocab("A3_input_file.txt"); //JUST A TEST
+        
 
         //While loop for the menu
         while (true) {
@@ -35,7 +36,6 @@ public class Driver {
                  */
                 case 1:
                     /*
-                     * Implement a method to browse a topic
                      * 1. Print all topics and ask user to choose one
                      * 2. Once a topic is chosen, print all words in that topic
                      * 3. Go back to asking what topic until user chooses to exit
@@ -48,7 +48,6 @@ public class Driver {
                  */
                 case 2:
                     /*
-                     * Implement a method to insert a new topic before another one
                      * 1. Ask user to select which topic he whishes to put the new one before
                      * 2. Ask user to input the new topic
                      * 3. Ask user to input the words for the new topic
@@ -62,7 +61,6 @@ public class Driver {
                  */
                 case 3:
                     /*
-                     * Implement a method to insert a new topic after another one
                      * 1. Ask user to select which topic he whishes to put the new one after
                      * 2. Ask user to input the new topic
                      * 3. Ask user to input the words for the new topic
@@ -76,7 +74,6 @@ public class Driver {
                  */
                 case 4:
                     /*
-                     * Implement a method to remove a topic
                      * 1. Print all topics and ask user to choose one
                      * 2. Once a topic is chosen, remove it
                      */
@@ -88,7 +85,6 @@ public class Driver {
                  */
                 case 5:
                     /*
-                     * Implement a method to modify a topic
                      * 1. Print all topics and ask user to choose one
                      * 2. Once a topic is chosen, ask user what he wants to modify
                      *  2.1. Add a word (if word already exist tell user)
@@ -117,8 +113,6 @@ public class Driver {
                     } catch (Exception e) {
                         System.out.println("File not found.");
                     }
-                    
-                    
                     break;
 
                 /*
@@ -137,11 +131,15 @@ public class Driver {
                  * Save to file
                  */
                 case 9:
-                    /*
-                     * Write to file in same format as input file
-                     * GIVEN A FILE NAME???
-                     */
-                    break;
+                    System.out.println("Enter the name of the new file: ");
+                    String fileWrite = sc.next();
+                    try {
+                        dll.printToFile(fileWrite); //Replace previous file with this one
+                        System.out.println("File created successfully.");
+                    } catch (Exception e) {
+                        System.out.println("File not created. Error occurred.");
+                    }
+                        break;
 
                 /*
                  * Exit the program

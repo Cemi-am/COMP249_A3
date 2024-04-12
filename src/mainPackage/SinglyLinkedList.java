@@ -1,6 +1,7 @@
+import java.io.*;
 
 public class SinglyLinkedList {
-    
+
     private SNode head;
     
     private class SNode {
@@ -111,7 +112,7 @@ public class SinglyLinkedList {
     // Add a new node to the begining of the list
     public void addToStart(String word) {
         head = new SNode(word, head); //Here, the previous reference held in head is now the link of the new node
-    } 
+    }
 
     //Inserts a new node at the end of the list
     public void insertAtEnd(String word) {
@@ -126,7 +127,7 @@ public class SinglyLinkedList {
         }
         newNode.setData(word);
         position.setLink(newNode);
-    }
+    }//End of insertAtEnd
 
     //Inserts a new node at a certain index
     public void insertAtIndex(String word, int index) {
@@ -140,6 +141,27 @@ public class SinglyLinkedList {
         newNode.setData(word); //Set the data of the new node
         newNode.setLink(position.getLink()); //Set the link of the new node to the next node
         position.setLink(newNode); //Set the link of the previous node to the new node
-    }
+    }//End of insertAtIndex
+
+    public static void singleToFile(Vocab vocab, String fileName) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));
+            
+            
+
+            SNode position = vocab.getWords().getHead();
+            bw.write("#" + vocab.getTopic());
+            bw.newLine();
+            while (position != null) {
+                bw.write(position.getWord());
+                bw.newLine();
+                position = position.getLink();
+            }
+            bw.newLine();
+            bw.close();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }//End of singleToFile
 
 }//End of SinglyLinkedList Class

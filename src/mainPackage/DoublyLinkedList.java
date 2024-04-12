@@ -281,4 +281,15 @@ public class DoublyLinkedList {
         } while(restart);
         return dll;
     }// end of removeTopic
+
+    public void printToFile(String fileName) {
+    
+        DNode position = head;
+        while (position != null) {
+            SinglyLinkedList.singleToFile(position.data, fileName);
+            position = position.next;
+        }
+
+    }
+
 }

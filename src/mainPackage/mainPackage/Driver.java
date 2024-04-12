@@ -1,20 +1,18 @@
 package mainPackage;
 import java.util.Scanner;
 public class Driver {
+    public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        // DoublyLinkedList dll = Vocab.inputToVocab("A3_input_file.txt"); //JUST A TEST
-        // dll.printList(); //JUST A TEST
-
-        Scanner scanner = new Scanner(System.in);
+        DoublyLinkedList dll = Vocab.inputToVocab("A3_input_file.txt"); //JUST A TEST
 
         //While loop for the menu
         while (true) {
             System.out.print("""
-            -----------------------------
-             Vocabulary Control Center
-            -----------------------------
+            ----------------------------------------------
+                      Vocabulary Control Center
+            ----------------------------------------------
             1 browse a topic
             2 insert a new topic before another one
             3 insert a new topic after another one
@@ -25,10 +23,10 @@ public class Driver {
             8 show all words starting with a given letter
             9 save to file
             0 exit
-            -----------------------------
-            Enter Your Choice: """);
+            ----------------------------------------------
+            Enter Your Choice:\s""");
 
-            int inputChoice = scanner.nextInt();
+            int inputChoice = sc.nextInt();
 
             switch (inputChoice) {
                 /*
@@ -41,8 +39,9 @@ public class Driver {
                      * 2. Once a topic is chosen, print all words in that topic
                      * 3. Go back to asking what topic until user chooses to exit
                      */
+                    browseTopics(dll);
                     break;
-                
+
                 /*
                  * Insert a new topic before another one
                  */
@@ -54,6 +53,7 @@ public class Driver {
                      * 3. Ask user to input the words for the new topic
                      * 4. Insert the new topic before the selected one
                      */
+                    dll = insertATopic(dll);
                     break;
 
                 /*
@@ -100,7 +100,7 @@ public class Driver {
                  * Search topics for a word
                  */
                 case 6:
-                    
+
                     break;
 
                 /*
@@ -108,8 +108,8 @@ public class Driver {
                  */
                 case 7:
                     System.out.println("Enter the name of the input file: ");
-                    String fileInput = scanner.nextLine();
-                    DoublyLinkedList dll = Vocab.inputToVocab(fileInput);
+                    String fileInput = sc.nextLine();
+                    DoublyLinkedList dll2 = Vocab.inputToVocab(fileInput);
                     System.out.println("File loaded successfully.");
                     break;
 
@@ -150,9 +150,86 @@ public class Driver {
                     System.out.println("Invalid input. Please try again.");
                     break;
             }
-            scanner.close();
+
         }
-        
+
+    }// end of main
+
+    public static void browseTopics(DoublyLinkedList dll) {
+        boolean restart = true;
+        do {
+            displayTopics(dll);
+            int userChoice = sc.nextInt();
+            sc.nextLine(); // junk
+
+            if (userChoice == 0) {
+                System.out.println();
+                restart = false;
+            } else {
+                DoublyLinkedList.DNode current = dll.getHead();
+
+                int index = 1;
+                while (current != null && index != userChoice) {
+                    current = current.next;
+                    index++;
+                }
+                if (current != null) {
+                    System.out.println("Topic: " + current.getData().getTopic());
+                    current.getData().getWords().printList();;
+                } else {
+                    System.out.println("Invalid index.");
+                }
+            }
+
+        } while(restart);
+
+    }// end of browseTopics
+
+    public static DoublyLinkedList insertATopic(DoublyLinkedList dll) {
+        boolean restart = true;
+        do {
+            displayTopics(dll);
+            int userChoice = sc.nextInt();
+            sc.nextLine(); // junk
+
+            if (userChoice == 0) {
+                System.out.println();
+                restart = false;
+            } else {
+                int newIndex = userChoice - 1;
+                System.out.print("Enter a topic name: ");
+                String newTopicName = sc.nextLine();
+
+                // Create new linkedlist with the new words
+                SinglyLinkedList newWords = new SinglyLinkedList();
+                System.out.println("Enter a word - to quit press Enter:");
+                String word = sc.nextLine();
+                while (!word.isEmpty()) {
+                    newWords.insertAtEnd(word);
+                    word = sc.nextLine();
+                }
+
+                // Create new Vocab object
+                Vocab newVocab = new Vocab(newTopicName, newWords);
+                dll.insertAtIndex(newVocab, newIndex);
+            }
+
+        } while(restart);
+
+
+        return dll;
     }
-    
-}
+
+    public static void displayTopics(DoublyLinkedList dll) {
+        System.out.println("""
+                ----------------------------------------------
+                                Pick a topic
+                ----------------------------------------------""");
+        dll.printList();
+        System.out.println("""
+                0. Exit
+                ----------------------------------------------""");
+        System.out.print("Enter your Choice: ");
+    }
+
+}// end of Driver

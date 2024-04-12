@@ -4,14 +4,14 @@ package mainPackage;
 //import java.util.ArrayList;   ONLY TO BE USED FOR CASE 8
 
 public class DoublyLinkedList {
-    
+
     private DNode head;
     private DNode tail;
 
-    private class DNode {
+    class DNode {
 
         private Vocab data;
-        private DNode next;
+        DNode next;
         private DNode prev;
 
         //Default Constructor
@@ -24,7 +24,7 @@ public class DoublyLinkedList {
             this.data = data;
             this.prev = prev;
             this.next = next;
-            
+
         }
 
         public DNode(Vocab data) {
@@ -69,7 +69,7 @@ public class DoublyLinkedList {
         if (isEmpty()) {
             head = newNode;
             tail = newNode;
-        } else { 
+        } else {
             tail.next = newNode; //The next of the last node is the new node
             newNode.prev = tail; //Previous of the new node is the tail
             tail = newNode; //Set newNode as the tail
@@ -93,16 +93,33 @@ public class DoublyLinkedList {
     //Insert a new node at a certain index
     public void insertAtIndex(Vocab vocab, int index) {
         DNode newNode = new DNode(vocab);
+
+        if (index == 0) {
+            addToStart(vocab);
+            return;
+        }
+
         DNode position = head;
         int count = 0;
-        while (position.next != null && count < index) {
+        while (position.next != null && count < index - 1) {
             position = position.next;
             count++;
         }
-        newNode.next = position.next; //Next of new node is set to the current position's next
-        position.next = newNode; //Position's next is set to the new node
-        newNode.prev = position; //New node's previous is set to the current position
-        position.next.prev = newNode; //Next node's previous is set to the new node
+
+        if (position == null) {
+            // Index out of bounds, insert at the end
+            insertAtEnd(vocab);
+        } else {
+            newNode.next = position.next;
+            newNode.prev = position;
+            if (position.next != null) {
+                position.next.prev = newNode;
+            } else {
+                // If inserting at the end, update the tail
+                tail = newNode;
+            }
+            position.next = newNode;
+        }
     }
 
 
@@ -139,5 +156,5 @@ public class DoublyLinkedList {
             count++;
         }
     }
-    
+
 }

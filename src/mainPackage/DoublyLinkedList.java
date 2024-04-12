@@ -1,17 +1,21 @@
 //import java.util.ArrayList;   ONLY TO BE USED FOR CASE 8
+import java.util.Scanner;
 
 public class DoublyLinkedList {
+
+    static Scanner sc = new Scanner(System.in);
 
     private DNode head;
     private DNode tail;
 
-    class DNode {
+    private class DNode {
 
         private Vocab data;
-        DNode next;
+        private DNode next;
         private DNode prev;
 
         //Default Constructor
+        @SuppressWarnings("unused")
         public DNode() {
             this(null, null, null);
         }
@@ -149,4 +153,132 @@ public class DoublyLinkedList {
         }
     }
 
+    public static void browseTopics(DoublyLinkedList dll) {
+        boolean restart = true;
+        do {
+            Driver.displayTopics(dll);
+            int userChoice = sc.nextInt();
+            sc.nextLine(); // junk
+
+            if (userChoice == 0) {
+                System.out.println();
+                restart = false;
+            } else {
+                 
+                DoublyLinkedList.DNode current = dll.getHead();
+
+                int index = 1;
+                while (current != null && index != userChoice) {
+                    current = current.next;
+                    index++;
+                }
+                if (current != null) {
+                    System.out.println("Topic: " + current.getData().getTopic());
+                    current.getData().getWords().printList();;
+                } else {
+                    System.out.println("Invalid index.");
+                }
+            }
+
+        } while(restart);
+
+    }// end of browseTopics
+
+    public static DoublyLinkedList insertATopicBefore(DoublyLinkedList dll) {
+        boolean restart = true;
+        do {
+            Driver.displayTopics(dll);
+            int userChoice = sc.nextInt();
+            sc.nextLine(); // junk
+
+            if (userChoice == 0) {
+                System.out.println();
+                restart = false;
+            } else {
+                int newIndex = userChoice - 1;
+                System.out.print("Enter a topic name: ");
+                String newTopicName = sc.nextLine();
+
+                // Create new linkedlist with the new words
+                SinglyLinkedList newWords = new SinglyLinkedList();
+                System.out.println("Enter a word - to quit press Enter:");
+                String word = sc.nextLine();
+                while (!word.isEmpty()) {
+                    newWords.insertAtEnd(word);
+                    word = sc.nextLine();
+                }
+
+                // Create new Vocab object
+                Vocab newVocab = new Vocab(newTopicName, newWords);
+                dll.insertAtIndex(newVocab, newIndex);
+            }
+
+        } while(restart);
+
+        return dll;
+    }// end of insertATopicBefore
+
+    public static DoublyLinkedList insertATopicAfter(DoublyLinkedList dll) {
+        boolean restart = true;
+        do {
+            Driver.displayTopics(dll);
+            int userChoice = sc.nextInt();
+            sc.nextLine(); // junk
+
+            if (userChoice == 0) {
+                System.out.println();
+                restart = false;
+            } else {
+                int newIndex = userChoice;
+                System.out.print("Enter a topic name: ");
+                String newTopicName = sc.nextLine();
+
+                // Create new linkedlist with the new words
+                SinglyLinkedList newWords = new SinglyLinkedList();
+                System.out.println("Enter a word - to quit press Enter:");
+                String word = sc.nextLine();
+                while (!word.isEmpty()) {
+                    newWords.insertAtEnd(word);
+                    word = sc.nextLine();
+                }
+
+                // Create new Vocab object
+                Vocab newVocab = new Vocab(newTopicName, newWords);
+                dll.insertAtIndex(newVocab, newIndex);
+            }
+
+        } while(restart);
+
+
+        return dll;
+    }// end of insertATopicAfter
+
+    public static DoublyLinkedList removeTopic(DoublyLinkedList dll) {
+        boolean restart = true;
+        do {
+            Driver.displayTopics(dll);
+            int userChoice = sc.nextInt();
+            sc.nextLine(); // junk
+
+            if (userChoice == 0) {
+                System.out.println();
+                restart = false;
+            } else {
+                DoublyLinkedList.DNode current = dll.getHead();
+
+                int index = 1;
+                while (current != null && index != userChoice) {
+                    current = current.next;
+                    index++;
+                }
+                if (current != null) {
+                    dll.removeVocab(current.getData().getTopic());
+                } else {
+                    System.out.println("Invalid index.");
+                }
+            }
+
+        } while(restart);
+        return dll;
+    }// end of removeTopic
 }

@@ -40,7 +40,7 @@ public class Driver {
                      * 2. Once a topic is chosen, print all words in that topic
                      * 3. Go back to asking what topic until user chooses to exit
                      */
-                    browseTopics(dll);
+                    DoublyLinkedList.browseTopics(dll);
                     break;
 
                 /*
@@ -54,7 +54,7 @@ public class Driver {
                      * 3. Ask user to input the words for the new topic
                      * 4. Insert the new topic before the selected one
                      */
-                    dll = insertATopicBefore(dll);
+                    dll = DoublyLinkedList.insertATopicBefore(dll);
                     break;
 
                 /*
@@ -68,7 +68,7 @@ public class Driver {
                      * 3. Ask user to input the words for the new topic
                      * 4. Insert the new topic after the selected one
                      */
-                    dll = insertATopicAfter(dll);
+                    dll = DoublyLinkedList.insertATopicAfter(dll);
                     break;
 
                 /*
@@ -80,7 +80,7 @@ public class Driver {
                      * 1. Print all topics and ask user to choose one
                      * 2. Once a topic is chosen, remove it
                      */
-                    dll = removeTopic(dll);
+                    dll = DoublyLinkedList.removeTopic(dll);
                     break;
 
                 /*
@@ -163,106 +163,6 @@ public class Driver {
 
     }// end of main
 
-    public static void browseTopics(DoublyLinkedList dll) {
-        boolean restart = true;
-        do {
-            displayTopics(dll);
-            int userChoice = sc.nextInt();
-            sc.nextLine(); // junk
-
-            if (userChoice == 0) {
-                System.out.println();
-                restart = false;
-            } else {
-                DoublyLinkedList.DNode current = dll.getHead();
-
-                int index = 1;
-                while (current != null && index != userChoice) {
-                    current = current.next;
-                    index++;
-                }
-                if (current != null) {
-                    System.out.println("Topic: " + current.getData().getTopic());
-                    current.getData().getWords().printList();;
-                } else {
-                    System.out.println("Invalid index.");
-                }
-            }
-
-        } while(restart);
-
-    }// end of browseTopics
-
-    public static DoublyLinkedList insertATopicBefore(DoublyLinkedList dll) {
-        boolean restart = true;
-        do {
-            displayTopics(dll);
-            int userChoice = sc.nextInt();
-            sc.nextLine(); // junk
-
-            if (userChoice == 0) {
-                System.out.println();
-                restart = false;
-            } else {
-                int newIndex = userChoice - 1;
-                System.out.print("Enter a topic name: ");
-                String newTopicName = sc.nextLine();
-
-                // Create new linkedlist with the new words
-                SinglyLinkedList newWords = new SinglyLinkedList();
-                System.out.println("Enter a word - to quit press Enter:");
-                String word = sc.nextLine();
-                while (!word.isEmpty()) {
-                    newWords.insertAtEnd(word);
-                    word = sc.nextLine();
-                }
-
-                // Create new Vocab object
-                Vocab newVocab = new Vocab(newTopicName, newWords);
-                dll.insertAtIndex(newVocab, newIndex);
-            }
-
-        } while(restart);
-
-
-        return dll;
-    }// end of insertATopicBefore
-
-    public static DoublyLinkedList insertATopicAfter(DoublyLinkedList dll) {
-        boolean restart = true;
-        do {
-            displayTopics(dll);
-            int userChoice = sc.nextInt();
-            sc.nextLine(); // junk
-
-            if (userChoice == 0) {
-                System.out.println();
-                restart = false;
-            } else {
-                int newIndex = userChoice;
-                System.out.print("Enter a topic name: ");
-                String newTopicName = sc.nextLine();
-
-                // Create new linkedlist with the new words
-                SinglyLinkedList newWords = new SinglyLinkedList();
-                System.out.println("Enter a word - to quit press Enter:");
-                String word = sc.nextLine();
-                while (!word.isEmpty()) {
-                    newWords.insertAtEnd(word);
-                    word = sc.nextLine();
-                }
-
-                // Create new Vocab object
-                Vocab newVocab = new Vocab(newTopicName, newWords);
-                dll.insertAtIndex(newVocab, newIndex);
-            }
-
-        } while(restart);
-
-
-        return dll;
-    }// end of insertATopicAfter
-
     public static void displayTopics(DoublyLinkedList dll) {
         System.out.println("""
                 ----------------------------------------------
@@ -274,34 +174,5 @@ public class Driver {
                 ----------------------------------------------""");
         System.out.print("Enter your Choice: ");
     }
-
-    public static DoublyLinkedList removeTopic(DoublyLinkedList dll) {
-        boolean restart = true;
-        do {
-            displayTopics(dll);
-            int userChoice = sc.nextInt();
-            sc.nextLine(); // junk
-
-            if (userChoice == 0) {
-                System.out.println();
-                restart = false;
-            } else {
-                DoublyLinkedList.DNode current = dll.getHead();
-
-                int index = 1;
-                while (current != null && index != userChoice) {
-                    current = current.next;
-                    index++;
-                }
-                if (current != null) {
-                    dll.removeVocab(current.getData().getTopic());
-                } else {
-                    System.out.println("Invalid index.");
-                }
-            }
-
-        } while(restart);
-        return dll;
-    } 
 
 }// end of Driver

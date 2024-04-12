@@ -64,7 +64,34 @@ public class Vocab {
         return vocabList;
     }//inputToVocab
 
+    // public void printToFile(DoublyLinkedList vocabList, String fileName) {
+    //     try {
+    //         BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+    //         DoublyLinkedList.DNode position = vocabList.getHead();
+            
+    //         while (position != null) {
+    //             bw.write("#" + position.getData().getTopic());
+    //             bw.newLine();
+    //             SinglyLinkedList.SNode words = position.getData().getWords().getHead();
+    //             while (words != null) {
+    //                 bw.write(words.getData());
+    //                 bw.newLine();
+    //                 words = words.getLink();
+    //             }
+    //             position = position.getNext();
+    //         }
 
+            
+    //         while (position != null) {
+    //             bw.write(position.getData());
+    //             bw.newLine();
+    //             position = position.getLink();
+    //         }
+    //         bw.close();
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
 
 
 

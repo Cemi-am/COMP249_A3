@@ -103,20 +103,15 @@ public class DoublyLinkedList {
             count++;
         }
 
-        if (position == null) {
-            // Index out of bounds, insert at the end
-            insertAtEnd(vocab);
+        newNode.next = position.next;
+        newNode.prev = position;
+        if (position.next != null) {
+            position.next.prev = newNode;
         } else {
-            newNode.next = position.next;
-            newNode.prev = position;
-            if (position.next != null) {
-                position.next.prev = newNode;
-            } else {
-                // If inserting at the end, update the tail
-                tail = newNode;
-            }
-            position.next = newNode;
+            // If inserting at the end, update the tail
+            tail = newNode;
         }
+        position.next = newNode;
     }
 
 

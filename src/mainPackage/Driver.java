@@ -80,6 +80,7 @@ public class Driver {
                      * 1. Print all topics and ask user to choose one
                      * 2. Once a topic is chosen, remove it
                      */
+                    dll = removeTopic(dll);
                     break;
 
                 /*
@@ -273,5 +274,34 @@ public class Driver {
                 ----------------------------------------------""");
         System.out.print("Enter your Choice: ");
     }
+
+    public static DoublyLinkedList removeTopic(DoublyLinkedList dll) {
+        boolean restart = true;
+        do {
+            displayTopics(dll);
+            int userChoice = sc.nextInt();
+            sc.nextLine(); // junk
+
+            if (userChoice == 0) {
+                System.out.println();
+                restart = false;
+            } else {
+                DoublyLinkedList.DNode current = dll.getHead();
+
+                int index = 1;
+                while (current != null && index != userChoice) {
+                    current = current.next;
+                    index++;
+                }
+                if (current != null) {
+                    dll.removeVocab(current.getData().getTopic());
+                } else {
+                    System.out.println("Invalid index.");
+                }
+            }
+
+        } while(restart);
+        return dll;
+    } 
 
 }// end of Driver

@@ -305,4 +305,20 @@ public class DoublyLinkedList {
             }// end of if
         }// end of while to choose topic
     }// end of modifyTopic
+
+    public void case6() {
+        System.out.println("Enter a word to search for: ");
+        String word = sc.nextLine();
+        DNode position = head;
+        boolean wordFound = false;
+        while (position != null) {
+            if (position.data.getWords().searchTopicForWord(position.data, word) == true) {
+                wordFound = true;
+            }
+            position = position.next;
+        }
+        if (wordFound == false) {
+            System.out.println("Word not found.");
+        }
+    }
 }

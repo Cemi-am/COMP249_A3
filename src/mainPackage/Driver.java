@@ -99,7 +99,7 @@ public class Driver {
                  * Search topics for a word
                  */
                 case 6:
-
+                    dll.case6();
                     break;
 
                 /*

@@ -174,14 +174,25 @@ public class SinglyLinkedList {
         }
     }//End of singleToFile
 
-    public void searchTopicForWord(String topic) {
+
+    /*
+     * Search inside ONE topic for a word
+     * if word is found, return the topic
+     * if word is not found, return null
+     * 
+     * In double linked list, call method for each topic
+     */
+
+    public boolean searchTopicForWord(Vocab vocab, String word) {
         SNode position = head;
         while (position != null) {
-            if (position.getWord().startsWith(topic)) {
-                System.out.println(position.getWord());
+            if (position.getWord().equals(word)) {
+                System.out.println("Word found in topic: " + vocab.getTopic());
+                return true;
             }
             position = position.getLink();
         }
+        return false;
     }//End of searchTopicForWords
 
 }//End of SinglyLinkedList Class

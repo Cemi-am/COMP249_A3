@@ -174,4 +174,14 @@ public class SinglyLinkedList {
         }
     }//End of singleToFile
 
+    public void searchTopicForWord(String topic) {
+        SNode position = head;
+        while (position != null) {
+            if (position.getWord().startsWith(topic)) {
+                System.out.println(position.getWord());
+            }
+            position = position.getLink();
+        }
+    }//End of searchTopicForWords
+
 }//End of SinglyLinkedList Class

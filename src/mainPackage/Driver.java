@@ -85,8 +85,8 @@ public class Driver {
                  */
                 case 5:
                     /*
-                     * -------------------1. Print all topics and ask user to choose one
-                     * 2. Once a topic is chosen, ask user what he wants to modify
+                     * 1. Print all topics and ask user to choose one
+                     * 2 . Once a topic is chosen, ask user what he wants to modify
                      *  2.1. Add a word (if word already exist tell user)
                      *  2.2. Remove a word (if word not found tell user it doesn't exist)
                      *  2.3. Modify a word (if word not found tell user it doesn't exist)

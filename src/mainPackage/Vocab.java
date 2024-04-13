@@ -74,6 +74,7 @@ public class Vocab {
             
             if (words.contains(word)) {
                 System.out.println("Word already exists.");
+                break;
             } else {
             words.insertAtEnd(word);
             word = sc.nextLine();

@@ -1,8 +1,10 @@
 import java.io.*;
+import java.util.Scanner;
 
 //add word, remove word, modify word, get topic, display words, get words
 public class Vocab {
 
+    Scanner sc = new Scanner(System.in);
     private String topic;
     private SinglyLinkedList words;
 
@@ -64,4 +66,42 @@ public class Vocab {
         return vocabList;
     }//inputToVocab
 
+
+    public void addWord() {
+        System.out.println("Type a word and press Enter, or press Enter to end input");
+        String word = sc.nextLine();
+        while (!word.isEmpty()) {
+            
+            if (words.contains(word)) {
+                System.out.println("Word already exists.");
+            } else {
+            words.insertAtEnd(word);
+            word = sc.nextLine();
+            }
+        }
+    }
+
+    public void removeWord() {
+        System.out.println("Type a word to remove and press Enter");
+        String word = sc.nextLine();
+        if (words.contains(word)) {
+            words.deleteAtIndex(words.search(word));
+        } else {
+            System.out.println("Word does not exist.");
+        }
+    }
+
+    public void changeWord() {
+        System.out.println("Type the word you want to change and press Enter");
+        String oldWord = sc.nextLine();
+        if (words.contains(oldWord)) {
+            int index = words.search(oldWord);
+            words.deleteAtIndex(index);
+            System.out.println("Type the new word and press Enter");
+            String newWord = sc.nextLine();
+            words.insertAtIndex(newWord, index);
+        } else {
+            System.out.println("Word does not exist.");
+        }
+    }
 }

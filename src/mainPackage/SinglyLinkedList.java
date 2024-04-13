@@ -3,9 +3,9 @@ import java.io.*;
 public class SinglyLinkedList {
 
     private SNode head;
-    
+
     private class SNode {
-        
+
         //Instance Variables
         private String word; //Data being stored
         private SNode link; //Pointer to the next node
@@ -42,7 +42,7 @@ public class SinglyLinkedList {
 
     public SNode getHead() {
         return head;
-    }  
+    }
 
 
 
@@ -156,8 +156,8 @@ public class SinglyLinkedList {
     public static void singleToFile(Vocab vocab, String fileName) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));
-            
-            
+
+
 
             SNode position = vocab.getWords().getHead();
             bw.write("#" + vocab.getTopic());

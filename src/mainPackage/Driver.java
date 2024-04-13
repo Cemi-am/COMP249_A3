@@ -7,7 +7,7 @@ public class Driver {
 
         //DoublyLinkedList dll = new DoublyLinkedList(); //OFFICIAL CODE
         DoublyLinkedList dll = Vocab.inputToVocab("A3_input_file.txt"); //JUST A TEST
-        
+
 
         //While loop for the menu
         while (true) {
@@ -26,7 +26,7 @@ public class Driver {
             9 save to file
             0 exit
             ----------------------------------------------
-            Enter Your Choice: """);
+            Enter Your Choice:\s""");
 
             int inputChoice = sc.nextInt();
 
@@ -126,6 +126,7 @@ public class Driver {
                      * Store extracted words in an ArrayList
                      * sort and print the ArrayList
                      */
+
                     break;
 
                 /*
@@ -140,7 +141,7 @@ public class Driver {
                     } catch (Exception e) {
                         System.out.println("File not created. Error occurred.");
                     }
-                        break;
+                    break;
 
                 /*
                  * Exit the program

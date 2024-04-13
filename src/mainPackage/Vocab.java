@@ -10,8 +10,8 @@ public class Vocab {
 
     //Default Constructor
     public Vocab() {
-            this.topic = null;
-            this.words = null;
+        this.topic = null;
+        this.words = null;
     }
 
     //Parameterized Constructor
@@ -35,11 +35,11 @@ public class Vocab {
      * 3. at an empty line, the topic is done
      * 4. create a new Vocab object with the topic and the SinglyLinkedList
      */
-    
+
 
     //Creates DoublyLinkedList, fills it with Vocab objects from txt and returns it
     public static DoublyLinkedList inputToVocab(String fileName) {
-        
+
         DoublyLinkedList vocabList = new DoublyLinkedList();
         BufferedReader br = null;
 
@@ -57,7 +57,7 @@ public class Vocab {
                         words.insertAtEnd(line);
                     }
                     Vocab vocab = new Vocab(topic, words);
-                    vocabList.insertAtEnd(vocab); 
+                    vocabList.insertAtEnd(vocab);
                 }
             }
         } catch (IOException e) {
@@ -71,13 +71,13 @@ public class Vocab {
         System.out.println("Type a word and press Enter, or press Enter to end input");
         String word = sc.nextLine();
         while (!word.isEmpty()) {
-            
+
             if (words.contains(word)) {
                 System.out.println("Word already exists.");
                 break;
             } else {
-            words.insertAtEnd(word);
-            word = sc.nextLine();
+                words.insertAtEnd(word);
+                word = sc.nextLine();
             }
         }
     }

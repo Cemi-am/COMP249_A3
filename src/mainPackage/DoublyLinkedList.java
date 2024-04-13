@@ -1,37 +1,27 @@
 //import java.util.ArrayList;   ONLY TO BE USED FOR CASE 8
 import java.util.Scanner;
-
 public class DoublyLinkedList {
-
     static Scanner sc = new Scanner(System.in);
-
     private DNode head;
     private DNode tail;
-
     private class DNode {
-
         private Vocab data;
         private DNode next;
         private DNode prev;
-
         //Default Constructor
         @SuppressWarnings("unused")
         public DNode() {
             this(null, null, null);
         }
-
         //Parameterized Constructor
         public DNode(Vocab data, DNode prev, DNode next) {
             this.data = data;
             this.prev = prev;
             this.next = next;
-
         }
-
         public DNode(Vocab data) {
             this(data, null, null);
         }
-
         //Accesors and Mutators???
         public Vocab getData() {
             return data;
@@ -40,18 +30,15 @@ public class DoublyLinkedList {
     public DNode getHead() {
         return head;
     }
-
     //Default Constructor
     public DoublyLinkedList() {
         head = null;
         tail = null;
     }
-
     //Check if the list is empty
     public boolean isEmpty() {
         return head == null;
     }
-
     //Return the length of the list
     public int size() {
         int count = 0;
@@ -62,7 +49,6 @@ public class DoublyLinkedList {
         }
         return count;
     }
-
     //Insert a new node at the end of the list
     public void insertAtEnd(Vocab vocab) {
         DNode newNode = new DNode(vocab);
@@ -76,7 +62,6 @@ public class DoublyLinkedList {
             tail = newNode; //Set newNode as the tail
         }
     }
-
     //Insert a new node at the beginning of the list
     public void addToStart(Vocab vocab) {
         DNode newNode = new DNode(vocab);
@@ -90,23 +75,19 @@ public class DoublyLinkedList {
             head = newNode; //Set newNode as the head
         }
     }
-
     //Insert a new node at a certain index
     public void insertAtIndex(Vocab vocab, int index) {
         DNode newNode = new DNode(vocab);
-
         if (index == 0) {
             addToStart(vocab);
             return;
         }
-
         DNode position = head;
         int count = 0;
         while (position.next != null && count < index - 1) {
             position = position.next;
             count++;
         }
-
         newNode.next = position.next;
         newNode.prev = position;
         if (position.next != null) {
@@ -117,11 +98,8 @@ public class DoublyLinkedList {
         }
         position.next = newNode;
     }
-
-
     public void removeVocab(String topic) {
         DNode position = head;
-
         while (position != null) {
             if (position.data.getTopic().equals(topic)) { //If the topic is found
                 if (position == head && position == tail) { //If there is only one node
@@ -142,7 +120,6 @@ public class DoublyLinkedList {
             position = position.next;
         }
     }
-
     public void printList() {
         DNode position = head;
         int count = 1;
@@ -152,21 +129,18 @@ public class DoublyLinkedList {
             count++;
         }
     }
-
     public static void browseTopics(DoublyLinkedList dll) {
         boolean restart = true;
         do {
             Driver.displayTopics(dll);
             int userChoice = sc.nextInt();
             sc.nextLine(); // junk
-
             if (userChoice == 0) {
                 System.out.println();
                 restart = false;
             } else {
-                 
-                DoublyLinkedList.DNode current = dll.getHead();
 
+                DoublyLinkedList.DNode current = dll.getHead();
                 int index = 1;
                 while (current != null && index != userChoice) {
                     current = current.next;
@@ -179,18 +153,14 @@ public class DoublyLinkedList {
                     System.out.println("Invalid index.");
                 }
             }
-
         } while(restart);
-
     }// end of browseTopics
-
     public static DoublyLinkedList insertATopicBefore(DoublyLinkedList dll) {
         boolean restart = true;
         do {
             Driver.displayTopics(dll);
             int userChoice = sc.nextInt();
             sc.nextLine(); // junk
-
             if (userChoice == 0) {
                 System.out.println();
                 restart = false;
@@ -198,7 +168,6 @@ public class DoublyLinkedList {
                 int newIndex = userChoice - 1;
                 System.out.print("Enter a topic name: ");
                 String newTopicName = sc.nextLine();
-
                 // Create new linkedlist with the new words
                 SinglyLinkedList newWords = new SinglyLinkedList();
                 System.out.println("Enter a word - to quit press Enter:");
@@ -207,24 +176,19 @@ public class DoublyLinkedList {
                     newWords.insertAtEnd(word);
                     word = sc.nextLine();
                 }
-
                 // Create new Vocab object
                 Vocab newVocab = new Vocab(newTopicName, newWords);
                 dll.insertAtIndex(newVocab, newIndex);
             }
-
         } while(restart);
-
         return dll;
     }// end of insertATopicBefore
-
     public static DoublyLinkedList insertATopicAfter(DoublyLinkedList dll) {
         boolean restart = true;
         do {
             Driver.displayTopics(dll);
             int userChoice = sc.nextInt();
             sc.nextLine(); // junk
-
             if (userChoice == 0) {
                 System.out.println();
                 restart = false;
@@ -232,7 +196,6 @@ public class DoublyLinkedList {
                 int newIndex = userChoice;
                 System.out.print("Enter a topic name: ");
                 String newTopicName = sc.nextLine();
-
                 // Create new linkedlist with the new words
                 SinglyLinkedList newWords = new SinglyLinkedList();
                 System.out.println("Enter a word - to quit press Enter:");
@@ -241,31 +204,24 @@ public class DoublyLinkedList {
                     newWords.insertAtEnd(word);
                     word = sc.nextLine();
                 }
-
                 // Create new Vocab object
                 Vocab newVocab = new Vocab(newTopicName, newWords);
                 dll.insertAtIndex(newVocab, newIndex);
             }
-
         } while(restart);
-
-
         return dll;
     }// end of insertATopicAfter
-
     public static DoublyLinkedList removeTopic(DoublyLinkedList dll) {
         boolean restart = true;
         do {
             Driver.displayTopics(dll);
             int userChoice = sc.nextInt();
             sc.nextLine(); // junk
-
             if (userChoice == 0) {
                 System.out.println();
                 restart = false;
             } else {
                 DoublyLinkedList.DNode current = dll.getHead();
-
                 int index = 1;
                 while (current != null && index != userChoice) {
                     current = current.next;
@@ -277,13 +233,11 @@ public class DoublyLinkedList {
                     System.out.println("Invalid index.");
                 }
             }
-
         } while(restart);
         return dll;
     }// end of removeTopic
-
     public void printToFile(String fileName) {
-    
+
         DNode position = head;
         while (position != null) {
             SinglyLinkedList.singleToFile(position.data, fileName);
@@ -322,9 +276,9 @@ public class DoublyLinkedList {
                         ----------------------------------------------""");
                         System.out.print("Enter your Choice: ");
                         String modChoice = sc.next();
-                        
+
                         switch (modChoice) {
-                            case "a":                            
+                            case "a":
                                 //addWord METHOD
                                 current.getData().addWord();
                                 break;
@@ -348,7 +302,7 @@ public class DoublyLinkedList {
                 } else {
                     System.out.println("Invalid input. Please try again.");
                 }// end of else
-            }// end of if 
+            }// end of if
         }// end of while to choose topic
     }// end of modifyTopic
 }

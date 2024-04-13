@@ -8,6 +8,7 @@ public class Driver {
         //DoublyLinkedList dll = new DoublyLinkedList(); //OFFICIAL CODE
         DoublyLinkedList dll = Vocab.inputToVocab("A3_input_file.txt"); //JUST A TEST
 
+
         //While loop for the menu
         while (true) {
             System.out.print("""
@@ -25,7 +26,7 @@ public class Driver {
             9 save to file
             0 exit
             ----------------------------------------------
-            Enter Your Choice: """);
+            Enter Your Choice:\s""");
 
             int inputChoice = sc.nextInt();
 
@@ -35,7 +36,6 @@ public class Driver {
                  */
                 case 1:
                     /*
-                     * Implement a method to browse a topic
                      * 1. Print all topics and ask user to choose one
                      * 2. Once a topic is chosen, print all words in that topic
                      * 3. Go back to asking what topic until user chooses to exit
@@ -48,7 +48,6 @@ public class Driver {
                  */
                 case 2:
                     /*
-                     * Implement a method to insert a new topic before another one
                      * 1. Ask user to select which topic he whishes to put the new one before
                      * 2. Ask user to input the new topic
                      * 3. Ask user to input the words for the new topic
@@ -62,7 +61,6 @@ public class Driver {
                  */
                 case 3:
                     /*
-                     * Implement a method to insert a new topic after another one
                      * 1. Ask user to select which topic he whishes to put the new one after
                      * 2. Ask user to input the new topic
                      * 3. Ask user to input the words for the new topic
@@ -76,7 +74,6 @@ public class Driver {
                  */
                 case 4:
                     /*
-                     * Implement a method to remove a topic
                      * 1. Print all topics and ask user to choose one
                      * 2. Once a topic is chosen, remove it
                      */
@@ -88,16 +85,16 @@ public class Driver {
                  */
                 case 5:
                     /*
-                     * Implement a method to modify a topic
-                     * 1. Print all topics and ask user to choose one
+                     * -------------------1. Print all topics and ask user to choose one
                      * 2. Once a topic is chosen, ask user what he wants to modify
                      *  2.1. Add a word (if word already exist tell user)
                      *  2.2. Remove a word (if word not found tell user it doesn't exist)
                      *  2.3. Modify a word (if word not found tell user it doesn't exist)
                      * 3. Go back to asking what change user whant until chooses to exit
                      */
-                    break;
 
+                    DoublyLinkedList.modifyTopic(dll);
+                    break;
                 /*
                  * Search topics for a word
                  */
@@ -117,8 +114,6 @@ public class Driver {
                     } catch (Exception e) {
                         System.out.println("File not found.");
                     }
-                    
-                    
                     break;
 
                 /*
@@ -131,16 +126,21 @@ public class Driver {
                      * Store extracted words in an ArrayList
                      * sort and print the ArrayList
                      */
+
                     break;
 
                 /*
                  * Save to file
                  */
                 case 9:
-                    /*
-                     * Write to file in same format as input file
-                     * GIVEN A FILE NAME???
-                     */
+                    System.out.println("Enter the name of the new file: ");
+                    String fileWrite = sc.next();
+                    try {
+                        dll.printToFile(fileWrite); //Replace previous file with this one
+                        System.out.println("File created successfully.");
+                    } catch (Exception e) {
+                        System.out.println("File not created. Error occurred.");
+                    }
                     break;
 
                 /*

@@ -1,10 +1,11 @@
+import java.io.*;
 
 public class SinglyLinkedList {
-    
+
     private SNode head;
-    
+
     private class SNode {
-        
+
         //Instance Variables
         private String word; //Data being stored
         private SNode link; //Pointer to the next node
@@ -41,7 +42,7 @@ public class SinglyLinkedList {
 
     public SNode getHead() {
         return head;
-    }  
+    }
 
 
 
@@ -59,7 +60,11 @@ public class SinglyLinkedList {
     public void deleteAtIndex(int index) {
         SNode position = head;
         int count = 0;
-        while (position.getLink() != null && count < index) {
+        if (index == 0) {
+            deleteHeadNode();
+            return;
+        }
+        while (position.getLink() != null && count < index-1) {
             position = position.getLink();
             count++;
         }
@@ -79,21 +84,23 @@ public class SinglyLinkedList {
 
     //Checks if the linkedList contains a certain word
     public boolean contains(String key) {
-        return (findData(key) != null);
+        return (search(key) != -1);
     }
 
     //Finds the data in the linkedList
-    private SNode findData(String target) {
+    public int search(String target) {
         SNode position = head;
         String dataAtPosition;
+        int count = 0;
         while (position != null) {
             dataAtPosition = position.getWord();
             if (dataAtPosition.equals(target)) {
-                return position;
+                return count;
             }
             position = position.getLink();
+            count++;
         }
-        return null;
+        return -1;
     }
 
     //Prints the linkedList
@@ -111,7 +118,7 @@ public class SinglyLinkedList {
     // Add a new node to the begining of the list
     public void addToStart(String word) {
         head = new SNode(word, head); //Here, the previous reference held in head is now the link of the new node
-    } 
+    }
 
     //Inserts a new node at the end of the list
     public void insertAtEnd(String word) {
@@ -126,20 +133,45 @@ public class SinglyLinkedList {
         }
         newNode.setData(word);
         position.setLink(newNode);
-    }
+    }//End of insertAtEnd
 
     //Inserts a new node at a certain index
     public void insertAtIndex(String word, int index) {
         SNode newNode = new SNode();
         SNode position = head;
+        if (index == 0) {
+            addToStart(word);
+            return;
+        }
         int count = 0;
-        while (position.getLink() != null && count < index) {
+        while (position.getLink() != null && count < index-1) {
             position = position.getLink();
             count++;
         }
         newNode.setData(word); //Set the data of the new node
         newNode.setLink(position.getLink()); //Set the link of the new node to the next node
         position.setLink(newNode); //Set the link of the previous node to the new node
-    }
+    }//End of insertAtIndex
+
+    public static void singleToFile(Vocab vocab, String fileName) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));
+
+
+
+            SNode position = vocab.getWords().getHead();
+            bw.write("#" + vocab.getTopic());
+            bw.newLine();
+            while (position != null) {
+                bw.write(position.getWord());
+                bw.newLine();
+                position = position.getLink();
+            }
+            bw.newLine();
+            bw.close();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }//End of singleToFile
 
 }//End of SinglyLinkedList Class

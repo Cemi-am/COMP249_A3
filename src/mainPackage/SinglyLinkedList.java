@@ -195,4 +195,35 @@ public class SinglyLinkedList {
         return false;
     }//End of searchTopicForWords
 
+    /*
+     * Displays all words starting with a given letter
+     * If words starting with the specified letter are found, they are printed
+     * If not, inform the user by printing a message indicating that
+     */
+
+    public static void displayWordsStartingWithLetter(char letter, DoublyLinkedList dll) {
+        DoublyLinkedList.DNode currentHead = dll.getHead();
+        boolean foundWord = false;
+
+        while (currentHead != null) {
+            SinglyLinkedList currentWords = currentHead.getData().getWords();
+            SinglyLinkedList.SNode currentNode = currentWords.getHead();
+
+            while (currentNode != null) {
+                String word = currentNode.getWord();
+                if (word.charAt(0) == letter) {
+                    System.out.println(word);
+                    foundWord = true;
+                }
+
+                currentNode = currentNode.getLink();
+            }
+            currentHead = currentHead.next;
+        }
+
+        if (!foundWord) {
+            System.out.println("No words found starting with the letter '" + letter + "'");
+        }
+    }
+
 }//End of SinglyLinkedList Class

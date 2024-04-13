@@ -4,9 +4,9 @@ public class DoublyLinkedList {
     static Scanner sc = new Scanner(System.in);
     private DNode head;
     private DNode tail;
-    private class DNode {
+    class DNode {
         private Vocab data;
-        private DNode next;
+        DNode next;
         private DNode prev;
         //Default Constructor
         @SuppressWarnings("unused")

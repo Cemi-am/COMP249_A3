@@ -1,0 +1,171 @@
+[1mdiff --git a/bin/mainPackage/DoublyLinkedList$DNode.class b/bin/mainPackage/DoublyLinkedList$DNode.class[m
+[1mdeleted file mode 100644[m
+[1mindex abf0bf6..0000000[m
+Binary files a/bin/mainPackage/DoublyLinkedList$DNode.class and /dev/null differ
+[1mdiff --git a/bin/mainPackage/DoublyLinkedList.class b/bin/mainPackage/DoublyLinkedList.class[m
+[1mdeleted file mode 100644[m
+[1mindex fa43ebd..0000000[m
+Binary files a/bin/mainPackage/DoublyLinkedList.class and /dev/null differ
+[1mdiff --git a/bin/mainPackage/Driver.class b/bin/mainPackage/Driver.class[m
+[1mdeleted file mode 100644[m
+[1mindex 3d8be10..0000000[m
+Binary files a/bin/mainPackage/Driver.class and /dev/null differ
+[1mdiff --git a/bin/mainPackage/SinglyLinkedList$SNode.class b/bin/mainPackage/SinglyLinkedList$SNode.class[m
+[1mdeleted file mode 100644[m
+[1mindex 565b40f..0000000[m
+Binary files a/bin/mainPackage/SinglyLinkedList$SNode.class and /dev/null differ
+[1mdiff --git a/bin/mainPackage/SinglyLinkedList.class b/bin/mainPackage/SinglyLinkedList.class[m
+[1mdeleted file mode 100644[m
+[1mindex a4e5185..0000000[m
+Binary files a/bin/mainPackage/SinglyLinkedList.class and /dev/null differ
+[1mdiff --git a/bin/mainPackage/Vocab.class b/bin/mainPackage/Vocab.class[m
+[1mdeleted file mode 100644[m
+[1mindex 99d2028..0000000[m
+Binary files a/bin/mainPackage/Vocab.class and /dev/null differ
+[1mdiff --git a/src/mainPackage/DoublyLinkedList.java b/src/mainPackage/DoublyLinkedList.java[m
+[1mindex dc1a581..3935209 100644[m
+[1m--- a/src/mainPackage/DoublyLinkedList.java[m
+[1m+++ b/src/mainPackage/DoublyLinkedList.java[m
+[36m@@ -281,4 +281,15 @@[m [mpublic class DoublyLinkedList {[m
+         } while(restart);[m
+         return dll;[m
+     }// end of removeTopic[m
+[32m+[m
+[32m+[m[32m    public void printToFile(String fileName) {[m
+[32m+[m[41m    [m
+[32m+[m[32m        DNode position = head;[m
+[32m+[m[32m        while (position != null) {[m
+[32m+[m[32m            SinglyLinkedList.singleToFile(position.data, fileName);[m
+[32m+[m[32m            position = position.next;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m    }[m
+[32m+[m
+ }[m
+[1mdiff --git a/src/mainPackage/Driver.java b/src/mainPackage/Driver.java[m
+[1mindex 9f45ae3..b55c644 100644[m
+[1m--- a/src/mainPackage/Driver.java[m
+[1m+++ b/src/mainPackage/Driver.java[m
+[36m@@ -7,6 +7,7 @@[m [mpublic class Driver {[m
+ [m
+         //DoublyLinkedList dll = new DoublyLinkedList(); //OFFICIAL CODE[m
+         DoublyLinkedList dll = Vocab.inputToVocab("A3_input_file.txt"); //JUST A TEST[m
+[32m+[m[41m        [m
+ [m
+         //While loop for the menu[m
+         while (true) {[m
+[36m@@ -35,7 +36,6 @@[m [mpublic class Driver {[m
+                  */[m
+                 case 1:[m
+                     /*[m
+[31m-                     * Implement a method to browse a topic[m
+                      * 1. Print all topics and ask user to choose one[m
+                      * 2. Once a topic is chosen, print all words in that topic[m
+                      * 3. Go back to asking what topic until user chooses to exit[m
+[36m@@ -48,7 +48,6 @@[m [mpublic class Driver {[m
+                  */[m
+                 case 2:[m
+                     /*[m
+[31m-                     * Implement a method to insert a new topic before another one[m
+                      * 1. Ask user to select which topic he whishes to put the new one before[m
+                      * 2. Ask user to input the new topic[m
+                      * 3. Ask user to input the words for the new topic[m
+[36m@@ -62,7 +61,6 @@[m [mpublic class Driver {[m
+                  */[m
+                 case 3:[m
+                     /*[m
+[31m-                     * Implement a method to insert a new topic after another one[m
+                      * 1. Ask user to select which topic he whishes to put the new one after[m
+                      * 2. Ask user to input the new topic[m
+                      * 3. Ask user to input the words for the new topic[m
+[36m@@ -76,7 +74,6 @@[m [mpublic class Driver {[m
+                  */[m
+                 case 4:[m
+                     /*[m
+[31m-                     * Implement a method to remove a topic[m
+                      * 1. Print all topics and ask user to choose one[m
+                      * 2. Once a topic is chosen, remove it[m
+                      */[m
+[36m@@ -88,7 +85,6 @@[m [mpublic class Driver {[m
+                  */[m
+                 case 5:[m
+                     /*[m
+[31m-                     * Implement a method to modify a topic[m
+                      * 1. Print all topics and ask user to choose one[m
+                      * 2. Once a topic is chosen, ask user what he wants to modify[m
+                      *  2.1. Add a word (if word already exist tell user)[m
+[36m@@ -117,8 +113,6 @@[m [mpublic class Driver {[m
+                     } catch (Exception e) {[m
+                         System.out.println("File not found.");[m
+                     }[m
+[31m-                    [m
+[31m-                    [m
+                     break;[m
+ [m
+                 /*[m
+[36m@@ -137,11 +131,15 @@[m [mpublic class Driver {[m
+                  * Save to file[m
+                  */[m
+                 case 9:[m
+[31m-                    /*[m
+[31m-                     * Write to file in same format as input file[m
+[31m-                     * GIVEN A FILE NAME???[m
+[31m-                     */[m
+[31m-                    break;[m
+[32m+[m[32m                    System.out.println("Enter the name of the new file: ");[m
+[32m+[m[32m                    String fileWrite = sc.next();[m
+[32m+[m[32m                    try {[m
+[32m+[m[32m                        dll.printToFile(fileWrite); //Replace previous file with this one[m
+[32m+[m[32m                        System.out.println("File created successfully.");[m
+[32m+[m[32m                    } catch (Exception e) {[m
+[32m+[m[32m                        System.out.println("File not created. Error occurred.");[m
+[32m+[m[32m                    }[m
+[32m+[m[32m                        break;[m
+ [m
+                 /*[m
+                  * Exit the program[m
+[1mdiff --git a/src/mainPackage/SinglyLinkedList.java b/src/mainPackage/SinglyLinkedList.java[m
+[1mindex d5e5605..0f276e8 100644[m
+[1m--- a/src/mainPackage/SinglyLinkedList.java[m
+[1m+++ b/src/mainPackage/SinglyLinkedList.java[m
+[36m@@ -1,6 +1,7 @@[m
+[32m+[m[32mimport java.io.*;[m
+ [m
+ public class SinglyLinkedList {[m
+[31m-    [m
+[32m+[m
+     private SNode head;[m
+     [m
+     private class SNode {[m
+[36m@@ -111,7 +112,7 @@[m [mpublic class SinglyLinkedList {[m
+     // Add a new node to the begining of the list[m
+     public void addToStart(String word) {[m
+         head = new SNode(word, head); //Here, the previous reference held in head is now the link of the new node[m
+[31m-    } [m
+[32m+[m[32m    }[m
+ [m
+     //Inserts a new node at the end of the list[m
+     public void insertAtEnd(String word) {[m
+[36m@@ -126,7 +127,7 @@[m [mpublic class SinglyLinkedList {[m
+         }[m
+         newNode.setData(word);[m
+         position.setLink(newNode);[m
+[31m-    }[m
+[32m+[m[32m    }//End of insertAtEnd[m
+ [m
+     //Inserts a new node at a certain index[m
+     public void insertAtIndex(String word, int index) {[m
+[36m@@ -140,6 +141,27 @@[m [mpublic class SinglyLinkedList {[m
+         newNode.setData(word); //Set the data of the new node[m
+         newNode.setLink(position.getLink()); //Set the link of the new node to the next node[m
+         position.setLink(newNode); //Set the link of the previous node to the new node[m
+[31m-    }[m
+[32m+[m[32m    }//End of insertAtIndex[m
+[32m+[m
+[32m+[m[32m    public static void singleToFile(Vocab vocab, String fileName) {[m
+[32m+[m[32m        try {[m
+[32m+[m[32m            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));[m
+[32m+[m[41m            [m
+[32m+[m[41m            [m
+[32m+[m
+[32m+[m[32m            SNode position

@@ -1,52 +1,91 @@
 import java.io.*;
 
+/**
+ * The SinglyLinkedList class contains the singly linked list of words
+ * Contains SNode class for the nodes in the linked list
+ * Contains methods to add and remove nodes from beggining, end, and at a certain index
+ * Methods that returns length of the linked list, checks if a word is in the linked list and at what index
+ * Prints the linked list on the terminal or on a file
+ */
 public class SinglyLinkedList {
 
     private SNode head;
 
+    /**
+     * Private inner class that represents a node in the singly linked list
+     * Contains a string data and a link to the next node
+     */
     private class SNode {
 
         //Instance Variables
         private String word; //Data being stored
         private SNode link; //Pointer to the next node
 
-        //Default Constructor
+        /**
+         * Default constructor
+         * Initializes the word and link to null
+         */
         public SNode() {
             word = null;
             link = null;
         }
 
-        //Parameterized Constructors
+        /**
+         * Parameterized constructor
+         * Initializes the word and link to the given values
+         * 
+         * @param newWord The word to be stored in the node
+         * @param linkValue The link to the next node
+         */
         public SNode(String newWord, SNode linkValue) {
             word = newWord;
             link = linkValue;
         }
 
-        //Mutators
+        /**
+         * Mutators
+         * @param newWord The word to be stored in the node
+         */
         public void setData(String newWord) {
             word = newWord;
         }
+        /**
+         * Mutators
+         * @param newLink The link to the next node
+         */
         public void setLink(SNode newLink) {
             link = newLink;
         }
 
-        //Accesors
+        /**
+         * Accessors
+         * @return The word stored in the node
+         */
         public String getWord() {
             return word;
         }
+        /**
+         * Accessors
+         * @return The link to the next node
+         */
         public SNode getLink() {
             return link;
         }
 
     }//End of SNode Class
 
+    /**
+     * Head accessor
+     * @return The head of the linked list
+     */
     public SNode getHead() {
         return head;
     }
 
-
-
-    //Sets the head to the next node (deletes the first node)
+    /**
+     * Deletes the first node in the linked list
+     * @return True if the node was deleted, false otherwise
+     */
     public boolean deleteHeadNode() {
         if (head != null) {
             head = head.getLink();
@@ -55,8 +94,11 @@ public class SinglyLinkedList {
             return false;
         }
     }
-
-    //Deletes a node at a certain index
+    
+    /**
+     * Deletes a node at a certain index in the linked list
+     * @param index The index of the node to be deleted
+     */
     public void deleteAtIndex(int index) {
         SNode position = head;
         int count = 0;
@@ -71,7 +113,10 @@ public class SinglyLinkedList {
         position.setLink(position.getLink().getLink()); //Set the link of the previous node to the node after the next node
     }
 
-    //Gives back the size of the linkedList
+    /**
+     * Returns the length of the linked list
+     * @return The length of the linked list
+     */
     public int size() {
         int count = 0;
         SNode position = head;
@@ -82,12 +127,24 @@ public class SinglyLinkedList {
         return count;
     }
 
-    //Checks if the linkedList contains a certain word
+    /**
+     * Checks if the linkedList contains a certain word
+     * 
+     * @param key The word to be searched for
+     * @return True if the word is in the linked list, false otherwise
+     */
     public boolean contains(String key) {
         return (search(key) != -1);
     }
 
-    //Finds the data in the linkedList
+    //
+
+    /**
+     * Finds the data in the linkedList
+     * Is used by the contains method
+     * @param target The word to be searched for
+     * @return The index of the word in the linked list, -1 if the word is not in the linked list
+     */
     public int search(String target) {
         SNode position = head;
         String dataAtPosition;
@@ -103,7 +160,9 @@ public class SinglyLinkedList {
         return -1;
     }
 
-    //Prints the linkedList
+    /**
+     * Prints the linked list on the terminal
+     */
     public void printList() {
         SNode position = head;
         int count = 1;
@@ -114,13 +173,20 @@ public class SinglyLinkedList {
         }
     }
 
-
-    // Add a new node to the begining of the list
+    /**
+     * Adds a new node to the beginning of the linked list
+     * @param word The word to be stored in the new node
+     */
     public void addToStart(String word) {
         head = new SNode(word, head); //Here, the previous reference held in head is now the link of the new node
     }
 
     //Inserts a new node at the end of the list
+
+    /**
+     * Adds a new node to the end of the linked list
+     * @param word The word to be stored in the new node
+     */
     public void insertAtEnd(String word) {
         if (head == null) {
             addToStart(word);
@@ -136,6 +202,12 @@ public class SinglyLinkedList {
     }//End of insertAtEnd
 
     //Inserts a new node at a certain index
+    /**
+     * Adds a new node at a certain index in the linked list
+     * 
+     * @param word The word to be stored in the new node
+     * @param index The index at which the new node is to be inserted
+     */
     public void insertAtIndex(String word, int index) {
         SNode newNode = new SNode();
         SNode position = head;
@@ -153,11 +225,15 @@ public class SinglyLinkedList {
         position.setLink(newNode); //Set the link of the previous node to the new node
     }//End of insertAtIndex
 
+    /**
+     * Prints the linked list to a file
+     * (To be called in a while loop so all vocab objects are printed to the file)
+     * @param vocab The vocab object to be printed
+     * @param fileName The name of the file to be printed to
+     */
     public static void singleToFile(Vocab vocab, String fileName) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));
-
-
 
             SNode position = vocab.getWords().getHead();
             bw.write("#" + vocab.getTopic());
@@ -174,15 +250,12 @@ public class SinglyLinkedList {
         }
     }//End of singleToFile
 
-
-    /*
-     * Search inside ONE topic for a word
-     * if word is found, return the topic
-     * if word is not found, return null
-     * 
-     * In double linked list, call method for each topic
+    /**
+     * Searches for a word in the linked list
+     * @param vocab The vocab object to be searched
+     * @param word The word to be searched for
+     * @return True if the word is in the linked list, false otherwise
      */
-
     public boolean searchTopicForWord(Vocab vocab, String word) {
         SNode position = head;
         while (position != null) {

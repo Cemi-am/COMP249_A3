@@ -1,8 +1,17 @@
 import java.util.Scanner;
 
+/**
+ * The Driver class contains the main method and handles user input to perform
+ */
 public class Driver {
     public static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Displays a menu and handles user input to perform various 
+     * operations on the doubly linked list and the singly linked list.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
 
         //DoublyLinkedList dll = new DoublyLinkedList(); //OFFICIAL CODE
@@ -163,6 +172,11 @@ public class Driver {
 
     }// end of main
 
+    /**
+     * Displays the list of topics to the user.
+     *
+     * @param dll The doubly linked list of topics.
+     */
     public static void displayTopics(DoublyLinkedList dll) {
         System.out.println("""
                 ----------------------------------------------

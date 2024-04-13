@@ -1,45 +1,88 @@
 //import java.util.ArrayList;   ONLY TO BE USED FOR CASE 8
 import java.util.Scanner;
+
+/**
+ * The DoublyLinkedList class contains the doubly linked list of topics
+ * Contains DNode class for the nodes in the linked list
+ * Contains methods to add and remove nodes from beggining, end, and at a certain index
+ * Methods that returns length of the linked list
+ * Methods useful for browsing, inserting, removing, and modifying topics mainly used in the driver class
+ */
 public class DoublyLinkedList {
     static Scanner sc = new Scanner(System.in);
     private DNode head;
     private DNode tail;
+
+    /**
+     * Private inner class that represents a node in the doubly linked list
+     * Contains a Vocab data and links to the next and previous nodes
+     */
     private class DNode {
         private Vocab data;
         private DNode next;
         private DNode prev;
-        //Default Constructor
-        @SuppressWarnings("unused")
-        public DNode() {
-            this(null, null, null);
-        }
-        //Parameterized Constructor
+        
+        /**
+         * Parametrized constructor
+         * Initializes the data, prev, and next to null
+         * 
+         * @param data The data to be stored in the node
+         * @param prev The link to the previous node
+         * @param next The link to the next node
+         */
         public DNode(Vocab data, DNode prev, DNode next) {
             this.data = data;
             this.prev = prev;
             this.next = next;
         }
+
+        /**
+         * Parameterized constructor
+         * Initializes the data to the given value and prev and next to null
+         * 
+         * @param data The data to be stored in the node
+         */
         public DNode(Vocab data) {
             this(data, null, null);
         }
-        //Accesors and Mutators???
+
+        /**
+         * Accessor method for the data
+         * @return The data of the node
+         */
         public Vocab getData() {
             return data;
         }
     }
+
+    /**
+     * Accessor method for the head
+     * @return The head of the doubly linked list
+     */
     public DNode getHead() {
         return head;
     }
-    //Default Constructor
+
+    /**
+     * Default constructor for the DoublyLinkedList
+     */
     public DoublyLinkedList() {
         head = null;
         tail = null;
     }
-    //Check if the list is empty
+
+    /**
+     * Method to check if the linked list is empty
+     * @return True if the linked list is empty, false otherwise
+     */
     public boolean isEmpty() {
         return head == null;
     }
-    //Return the length of the list
+
+    /**
+     * Method to return the size of the linked list
+     * @return The size of the linked list
+     */
     public int size() {
         int count = 0;
         DNode position = head;
@@ -49,7 +92,11 @@ public class DoublyLinkedList {
         }
         return count;
     }
-    //Insert a new node at the end of the list
+
+    /**
+     * Method to insert a new node at the end of the list
+     * @param vocab The vocab object to be stored in the node
+     */
     public void insertAtEnd(Vocab vocab) {
         DNode newNode = new DNode(vocab);
         //if DoublyLinkedList is empty
@@ -62,7 +109,11 @@ public class DoublyLinkedList {
             tail = newNode; //Set newNode as the tail
         }
     }
-    //Insert a new node at the beginning of the list
+
+    /**
+     * Method to add a new node at the start of the list
+     * @param vocab The vocab object to be stored in the node
+     */
     public void addToStart(Vocab vocab) {
         DNode newNode = new DNode(vocab);
         //if DoublyLinkedList is empty
@@ -75,7 +126,12 @@ public class DoublyLinkedList {
             head = newNode; //Set newNode as the head
         }
     }
-    //Insert a new node at a certain index
+
+    /**
+     * Method to insert a new node at a certain index
+     * @param vocab The vocab object to be stored in the node
+     * @param index The index at which the node is to be inserted
+     */
     public void insertAtIndex(Vocab vocab, int index) {
         DNode newNode = new DNode(vocab);
         if (index == 0) {
@@ -98,6 +154,11 @@ public class DoublyLinkedList {
         }
         position.next = newNode;
     }
+
+    /**
+     * Method to remove a node from the list
+     * @param topic The topic of the vocab object to be removed
+     */
     public void removeVocab(String topic) {
         DNode position = head;
         while (position != null) {
@@ -120,6 +181,10 @@ public class DoublyLinkedList {
             position = position.next;
         }
     }
+
+    /**
+     * Method to print the list of topics
+     */
     public void printList() {
         DNode position = head;
         int count = 1;
@@ -129,6 +194,12 @@ public class DoublyLinkedList {
             count++;
         }
     }
+
+    /**
+     * Method to browse the topics and display the words in the selected topic
+     * Used in the driver class
+     * @param dll The doubly linked list of topics
+     */
     public static void browseTopics(DoublyLinkedList dll) {
         boolean restart = true;
         do {
@@ -155,6 +226,13 @@ public class DoublyLinkedList {
             }
         } while(restart);
     }// end of browseTopics
+
+    /**
+     * Method to insert a new topic before a selected index (index is selected with scanner)
+     * Used in the driver class
+     * @param dll The doubly linked list of topics
+     * @return The updated doubly linked list
+     */
     public static DoublyLinkedList insertATopicBefore(DoublyLinkedList dll) {
         boolean restart = true;
         do {
@@ -183,6 +261,13 @@ public class DoublyLinkedList {
         } while(restart);
         return dll;
     }// end of insertATopicBefore
+
+    /**
+     * Method to insert a new topic after a selected index (index is selected with scanner)
+     * Used in the driver class
+     * @param dll The doubly linked list of topics
+     * @return The updated doubly linked list
+     */
     public static DoublyLinkedList insertATopicAfter(DoublyLinkedList dll) {
         boolean restart = true;
         do {
@@ -211,6 +296,13 @@ public class DoublyLinkedList {
         } while(restart);
         return dll;
     }// end of insertATopicAfter
+
+    /**
+     * Method to remove a topic from the list
+     * Used in the driver class
+     * @param dll The doubly linked list of topics
+     * @return The updated doubly linked list
+     */
     public static DoublyLinkedList removeTopic(DoublyLinkedList dll) {
         boolean restart = true;
         do {
@@ -236,6 +328,12 @@ public class DoublyLinkedList {
         } while(restart);
         return dll;
     }// end of removeTopic
+
+    /**
+     * Method to print the topics and words to a file
+     * Used in a loop to print all topics and words
+     * @param fileName The name of the file to be printed to
+     */
     public void printToFile(String fileName) {
 
         DNode position = head;
@@ -246,6 +344,11 @@ public class DoublyLinkedList {
 
     }
 
+    /**
+     * Method to modify a topic
+     * Used in the driver class
+     * @param dll The doubly linked list of topics
+     */
     public static void modifyTopic(DoublyLinkedList dll) {
         while (true) {
             Driver.displayTopics(dll);
@@ -306,6 +409,10 @@ public class DoublyLinkedList {
         }// end of while to choose topic
     }// end of modifyTopic
 
+    /**
+     * Method to search for a word in the topics
+     * Used in the driver class
+     */
     public void case6() {
         System.out.println("Enter a word to search for: ");
         String word = sc.nextLine();

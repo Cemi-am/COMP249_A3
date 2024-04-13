@@ -1,43 +1,61 @@
 import java.io.*;
 import java.util.Scanner;
 
-//add word, remove word, modify word, get topic, display words, get words
+/**
+ * The Vocab class contains the topic and words of the vocabulary
+ * Also contains methods to add, remove, and change words in the vocabulary
+ */
 public class Vocab {
 
     Scanner sc = new Scanner(System.in);
     private String topic;
     private SinglyLinkedList words;
 
-    //Default Constructor
+    /**
+     * Default constructor
+     * Initializes the topic and words to null
+     *  
+     * @param topic The topic of the vocabulary
+     * @param words The words in the vocabulary
+     */
     public Vocab() {
         this.topic = null;
         this.words = null;
     }
 
-    //Parameterized Constructor
+    /**
+     * Parameterized constructor
+     * Initializes the topic and words to the given values
+     * 
+     * @param topic The topic of the vocabulary
+     * @param words The words in the vocabulary
+     */
     public Vocab(String topic, SinglyLinkedList words) {
         this.topic = topic;
         this.words = words;
     }
 
-    //Accesors
+    /**
+     * Accessor method for the topic
+     * @return The topic of the vocabulary
+     */
     public String getTopic() {
         return topic;
     }
+    /**
+     * Accessor method for the words
+     * @return The words in the vocabulary
+     */
     public SinglyLinkedList getWords() {
         return words;
     }
 
-    /* INSTRUCTIONS
-     * Need to read a single file
-     * 1. every "#" means the rest of the line (remove white space) is a topic
-     * 2. iterate through every line that has words and add them to the SinglyLinkedList
-     * 3. at an empty line, the topic is done
-     * 4. create a new Vocab object with the topic and the SinglyLinkedList
+    /**
+     * Reads a file and creates a doubly linked list of vocab objects
+     * 
+     * @param fileName The name of the file to read
+     * @return The doubly linked list of vocab objects
      */
-
-
-    //Creates DoublyLinkedList, fills it with Vocab objects from txt and returns it
     public static DoublyLinkedList inputToVocab(String fileName) {
 
         DoublyLinkedList vocabList = new DoublyLinkedList();
@@ -66,7 +84,10 @@ public class Vocab {
         return vocabList;
     }//inputToVocab
 
-
+    /**
+     * Adds a word to the vocabulary
+     * takes no param because it reads from the scanner
+     */
     public void addWord() {
         System.out.println("Type a word and press Enter, or press Enter to end input");
         String word = sc.nextLine();
@@ -82,6 +103,10 @@ public class Vocab {
         }
     }
 
+    /**
+     * Removes a word from the vocabulary
+     * takes no param because it reads from the scanner
+     */
     public void removeWord() {
         System.out.println("Type a word to remove and press Enter");
         String word = sc.nextLine();
@@ -92,6 +117,10 @@ public class Vocab {
         }
     }
 
+    /**
+     * Changes a word in the vocabulary
+     * takes no param because it reads from the scanner
+     */
     public void changeWord() {
         System.out.println("Type the word you want to change and press Enter");
         String oldWord = sc.nextLine();

@@ -1,4 +1,8 @@
-//import java.util.ArrayList;   ONLY TO BE USED FOR CASE 8
+//---------------------------------------------------------------------------------------------------------------------
+// Assignment 3 - COMP 249
+// due March 15th 2024
+// Written by: Samy Mezimez 40275766 and Hiba Talbi 40278717
+//---------------------------------------------------------------------------------------------------------------------
 import java.util.ArrayList;
 import java.util.Scanner;
 

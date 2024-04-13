@@ -135,11 +135,7 @@ public class Driver {
                      * Store extracted words in an ArrayList
                      * sort and print the ArrayList
                      */
-                    System.out.print("Enter a letter: ");
-                    char letter = sc.next().charAt(0);
-                    sc.nextLine();
-
-                    SinglyLinkedList.displayWordsStartingWithLetter(letter, dll);
+                    System.out.println(dll.charInList());
                     break;
 
 

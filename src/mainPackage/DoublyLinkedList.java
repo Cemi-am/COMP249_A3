@@ -1,4 +1,5 @@
 //import java.util.ArrayList;   ONLY TO BE USED FOR CASE 8
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -428,4 +429,46 @@ public class DoublyLinkedList {
             System.out.println("Word not found.");
         }
     }
-}
+
+    /**
+     * Search for words that contain a certain letter
+     * @return An ArrayList of words that contain the letter
+     */
+    public ArrayList<String> charInList(){
+        ArrayList<String> words = new ArrayList<String>();
+        System.out.println("Enter a letter: ");
+        char letter = sc.next().charAt(0);
+        sc.nextLine();
+        DNode position = head;
+        while (position != null) {
+            position.data.getWords().charInVocab(letter, words);
+            position = position.next;
+        }
+        
+        sortingArray(words);
+        if (words.size() == 0) {
+            words.add("No words found with this letter.");
+        }
+        return words;
+    }
+
+    /**
+     * Sorts the ArrayList of words
+     * @param words The ArrayList of words to be sorted
+     */
+    private void sortingArray(ArrayList<String> words) {
+        int n = words.size();
+        for (int i = 0; i < n-1; i++) {
+            int min = i;
+            for (int j = i+1; j < n; j++) {
+                if (words.get(j).compareTo(words.get(min)) < 0) {
+                    min = j;
+                }
+            }
+            String temp = words.get(min);
+            words.set(min, words.get(i));
+            words.set(i, temp);
+        }
+    }
+
+}// end of DoublyLinkedList

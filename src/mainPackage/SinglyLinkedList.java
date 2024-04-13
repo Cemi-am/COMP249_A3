@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * The SinglyLinkedList class contains the singly linked list of words
@@ -268,35 +269,20 @@ public class SinglyLinkedList {
         return false;
     }//End of searchTopicForWords
 
-    /*
-     * Displays all words starting with a given letter
-     * If words starting with the specified letter are found, they are printed
-     * If not, inform the user by printing a message indicating that
+    /**
+     * If a word in the linked list starts with a certain letter
+     * puts it in an arrayList
+     * @param letter The letter to be searched for
+     * @param words The arrayList to store the words
      */
-
-    public static void displayWordsStartingWithLetter(char letter, DoublyLinkedList dll) {
-        DoublyLinkedList.DNode currentHead = dll.getHead();
-        boolean foundWord = false;
-
-        while (currentHead != null) {
-            SinglyLinkedList currentWords = currentHead.getData().getWords();
-            SinglyLinkedList.SNode currentNode = currentWords.getHead();
-
-            while (currentNode != null) {
-                String word = currentNode.getWord();
-                if (word.charAt(0) == letter) {
-                    System.out.println(word);
-                    foundWord = true;
-                }
-
-                currentNode = currentNode.getLink();
+    public void charInVocab(char letter, ArrayList<String> words) {
+        SNode position = head;
+        while (position != null) {
+            if (position.getWord().charAt(0) == letter) {
+                words.add(position.getWord());
             }
-            currentHead = currentHead.next;
+            position = position.getLink();
         }
-
-        if (!foundWord) {
-            System.out.println("No words found starting with the letter '" + letter + "'");
-        }
-    }
+    }//End of charInVocab
 
 }//End of SinglyLinkedList Class

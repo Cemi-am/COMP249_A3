@@ -19,7 +19,7 @@ public class DoublyLinkedList {
      */
     private class DNode {
         private Vocab data;
-        private DNode next;
+        DNode next;
         private DNode prev;
         
         /**

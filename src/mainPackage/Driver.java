@@ -15,18 +15,18 @@ public class Driver {
             ----------------------------------------------
                       Vocabulary Control Center
             ----------------------------------------------
-            1 browse a topic
-            2 insert a new topic before another one
-            3 insert a new topic after another one
-            4 remove a topic
-            5 modify a topic
-            6 search topics for a word
-            7 load from a file
-            8 show all words starting with a given letter
-            9 save to file
-            0 exit
+            1. browse a topic
+            2. insert a new topic before another one
+            3. insert a new topic after another one
+            4. remove a topic
+            5. modify a topic
+            6. search topics for a word
+            7. load from a file
+            8. show all words starting with a given letter
+            9. save to file
+            0. exit
             ----------------------------------------------
-            Enter Your Choice: """);
+            Enter Your Choice:\s""");
 
             int inputChoice = sc.nextInt();
 
@@ -48,7 +48,7 @@ public class Driver {
                  */
                 case 2:
                     /*
-                     * 1. Ask user to select which topic he whishes to put the new one before
+                     * 1. Ask user to select which topic he wishes to put the new one before
                      * 2. Ask user to input the new topic
                      * 3. Ask user to input the words for the new topic
                      * 4. Insert the new topic before the selected one
@@ -92,6 +92,7 @@ public class Driver {
                      *  2.3. Modify a word (if word not found tell user it doesn't exist)
                      * 3. Go back to asking what change user whant until chooses to exit
                      */
+                    dll = DoublyLinkedList.modifyATopic(dll);
                     break;
 
                 /*

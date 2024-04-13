@@ -282,6 +282,90 @@ public class DoublyLinkedList {
         return dll;
     }// end of removeTopic
 
+    public static DoublyLinkedList modifyATopic(DoublyLinkedList dll) {
+        Driver.displayTopics(dll);
+        int topicChoice = sc.nextInt();
+        sc.nextLine();
+
+        DoublyLinkedList.DNode topicHead = dll.getHead();
+        int topicIndex = 1;
+        while (topicHead != null && topicIndex != topicChoice) {
+            topicHead = topicHead.next;
+            topicIndex++;
+        }
+
+        if (topicHead != null) {
+            System.out.println("Topic: " + topicHead.getData().getTopic());
+            topicHead.getData().getWords().printList();
+        }
+
+        System.out.print("""
+                    ----------------------------------------------
+                                  Modify Topics Menu
+                    ----------------------------------------------
+                    a. add a word
+                    r. remove a word
+                    c. change a word
+                    0. exit
+                    ----------------------------------------------
+                    Enter your choice:\s""");
+
+        String userChoice = sc.next();
+        sc.nextLine();
+        switch(userChoice) {
+            // Adding a word
+            case "a", "A" -> {
+                System.out.print("Type a word and press Enter or press Enter to end input:\n");
+                String newWord = sc.nextLine();
+                if (newWord.isEmpty()) {
+                    return dll;
+                } else {
+                    // Checking if the word already exists
+                    boolean wordExists = topicHead.getData().getWords().searchAWord(newWord);
+                    if (wordExists) {
+                        System.out.println("Sorry, the word: '" + newWord + "' is already listed!");
+                        return dll;
+                    } else {
+                        topicHead.getData().getWords().insertAtEnd(newWord);
+                    }
+                }
+            }
+            // Removing a Word
+            case "r", "R" -> {
+                System.out.print("Enter a word: ");
+                String wordToRemove = sc.nextLine();
+                if (topicHead.getData().getWords().searchAWord(wordToRemove)) {
+                    topicHead.getData().getWords().deleteWord(wordToRemove);
+                } else {
+                    System.out.println("Sorry, there is no word: " + wordToRemove);
+                }
+            }
+            case "c", "C" -> {
+                System.out.print("Enter the word you wish to change: ");
+                String wordToChange = sc.nextLine();
+
+                // Check if the word exists
+                if (topicHead.getData().getWords().searchAWord(wordToChange)) {
+                    System.out.print("Enter the new word: ");
+                    String newWord = sc.nextLine();
+
+                    // Replace the old word
+                    topicHead.getData().getWords().changeWord(wordToChange, newWord);
+                } else {
+                    System.out.println("Sorry, there is no word: " + wordToChange);
+                }
+            }
+            case "0" -> {
+                return dll;
+            }
+            default -> {
+                System.out.println("Invalid choice.");
+            }
+        }
+
+        return dll;
+    }// end of modifyATopic
+
     public void printToFile(String fileName) {
     
         DNode position = head;

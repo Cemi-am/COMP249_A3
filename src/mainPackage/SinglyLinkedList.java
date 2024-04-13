@@ -164,4 +164,45 @@ public class SinglyLinkedList {
         }
     }//End of singleToFile
 
+    public boolean searchAWord(String word) {
+        SNode current = head;
+        while (current != null) {
+            if (current.getWord().equalsIgnoreCase(word)) {
+                return true;
+            }
+            current = current.getLink();
+        }
+        return false;
+    }// End of searchAWord
+
+    public boolean deleteWord(String wordToDelete) {
+        if (head == null) {
+            return false;// empty list
+        }
+        if (head.getWord().equals(wordToDelete)) {
+            head = head.getLink();// head points to the second node in the list
+            return true;
+        }
+        SNode current = head;
+
+        while (current.getLink() != null) {
+            if (current.getLink().getWord().equals(wordToDelete)) {
+                current.setLink(current.getLink().getLink());// skips over the node to delete
+                return true;
+            }
+            current = current.getLink();
+        }
+        return false; // Word isn't found
+    }// end of deleteWord
+
+    public void changeWord(String oldWord, String newWord) {
+        SNode current = head;
+        while (current != null) {
+            if (current.getWord().equals(oldWord)) {
+                current.setData(newWord);// replace old word
+                return;
+            }
+            current = current.getLink();
+        }
+    }
 }//End of SinglyLinkedList Class
